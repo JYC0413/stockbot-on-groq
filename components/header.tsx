@@ -19,7 +19,7 @@ async function UserOrLogin() {
         {/* <IconGroq className="size-6 mr-2 dark:hidden" />
           <IconGroq className="hidden size-6 mr-2 dark:block" /> */}
         <Image
-          src="/groqlabs-logo-black.png"
+          src="https://www.gaianet.ai/imgs/logo.png"
           alt="GroqLabs Logo"
           width={100}
           height={30}
@@ -54,7 +54,7 @@ export function Header() {
       <div className="flex items-center justify-end space-x-2">
         <a
           target="_blank"
-          href="https://github.com/bklieger-groq/groq-gen-ui/"
+          href="https://github.com/second-state/stockbot-on-gaia"
           rel="noopener noreferrer"
           className={cn(buttonVariants({ variant: 'outline' }))}
           style={{ borderRadius: 0 }}

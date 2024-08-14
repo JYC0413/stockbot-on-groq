@@ -7,6 +7,11 @@ module.exports = {
         hostname: 'avatars.githubusercontent.com',
         port: '',
         pathname: '**'
+      }, {
+        protocol: 'https',
+        hostname: 'www.gaianet.ai',
+        port: '',
+        pathname: '**'
       }
     ]
   }

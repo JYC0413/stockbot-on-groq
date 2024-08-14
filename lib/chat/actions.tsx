@@ -44,7 +44,6 @@ interface MutableAIState {
 
 const MODEL = 'llama3-70b-8192'
 const TOOL_MODEL = 'llama3-70b-8192'
-const GROQ_API_KEY_ENV = process.env.GROQ_API_KEY
 
 type ComparisonSymbolObject = {
   symbol: string;
@@ -57,11 +56,11 @@ async function generateCaption(
   toolName: string,
   aiState: MutableAIState
 ): Promise<string> {
-  const groq = createOpenAI({
-    baseURL: 'https://api.groq.com/openai/v1',
-    apiKey: GROQ_API_KEY_ENV
-  })
-  
+  const LlamaEdge = createOpenAI({
+    baseURL: process.env.LLAMAEDGE_BASE_URL,
+    apiKey: process.env.LLAMAEDGE_API_KEY
+  });
+
   const stockString = comparisonSymbols.length === 0
   ? symbol
   : [symbol, ...comparisonSymbols.map(obj => obj.symbol)].join(', ');
@@ -147,7 +146,7 @@ Besides the symbol, you cannot customize any of the screeners or graphics. Do no
 
   try {
     const response = await generateText({
-      model: groq(MODEL),
+      model: LlamaEdge(process.env.LLAMAEDGE_MODEL_NAME),
       messages: [
         {
           role: 'system',
@@ -187,13 +186,15 @@ async function submitUserMessage(content: string) {
   let textNode: undefined | React.ReactNode
 
   try {
-    const groq = createOpenAI({
-      baseURL: 'https://api.groq.com/openai/v1',
-      apiKey: GROQ_API_KEY_ENV
-    })
-
+    console.log(process.env.LLAMAEDGE_BASE_URL)
+    const LlamaEdge = createOpenAI({
+      baseURL: process.env.LLAMAEDGE_BASE_URL,
+      apiKey: process.env.LLAMAEDGE_API_KEY
+    });
+    console.log(LlamaEdge)
+    console.log(LlamaEdge(process.env.LLAMAEDGE_MODEL_NAME))
     const result = await streamUI({
-      model: groq(TOOL_MODEL),
+      model: LlamaEdge(process.env.LLAMAEDGE_MODEL_NAME),
       initial: <SpinnerMessage />,
       maxRetries: 1,
       system: `\
@@ -244,7 +245,7 @@ Assistant (you): { "tool_call": { "id": "pending", "type": "function", "function
         } else {
           textStream.update(delta)
         }
-
+        console.log(textNode)
         return textNode
       },
       tools: {
@@ -810,11 +811,7 @@ Assistant (you): { "tool_call": { "id": "pending", "type": "function", "function
       display: result.value
     }
   } catch (err: any) {
-    // If key is missing, show error message that Groq API Key is missing.
-    if (err.message.includes('OpenAI API key is missing.')) {
-      err.message =
-        'Groq API key is missing. Pass it using the GROQ_API_KEY environment variable. Try restarting the application if you recently changed your environment variables.'
-    }
+    console.log(err)
     return {
       id: nanoid(),
       display: (

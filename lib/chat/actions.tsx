@@ -9,6 +9,9 @@ import {
 } from 'ai/rsc'
 import { createOpenAI } from '@ai-sdk/openai'
 
+import dotenv from 'dotenv';
+
+
 import { BotCard, BotMessage } from '@/components/stocks/message'
 
 import { z } from 'zod'
@@ -25,6 +28,12 @@ import { MarketHeatmap } from '@/components/tradingview/market-heatmap'
 import { MarketTrending } from '@/components/tradingview/market-trending'
 import { ETFHeatmap } from '@/components/tradingview/etf-heatmap'
 import { toast } from 'sonner'
+
+dotenv.config();
+
+const modelName = process.env.LLAMAEDGE_MODEL_NAME || "llama"
+const baseUrl = process.env.LLAMAEDGE_BASE_URL || "https://llamatool.us.gaianet.network/v1"
+const apiKey = process.env.LLAMAEDGE_API_KEY || "LLAMAEDGE"
 
 export type AIState = {
   chatId: string
@@ -57,8 +66,8 @@ async function generateCaption(
   aiState: MutableAIState
 ): Promise<string> {
   const LlamaEdge = createOpenAI({
-    baseURL: process.env.LLAMAEDGE_BASE_URL,
-    apiKey: process.env.LLAMAEDGE_API_KEY
+    baseURL: baseUrl,
+    apiKey: apiKey
   });
 
   const stockString = comparisonSymbols.length === 0
@@ -146,7 +155,7 @@ Besides the symbol, you cannot customize any of the screeners or graphics. Do no
 
   try {
     const response = await generateText({
-      model: LlamaEdge(process.env.LLAMAEDGE_MODEL_NAME),
+      model: LlamaEdge(modelName),
       messages: [
         {
           role: 'system',
@@ -186,15 +195,12 @@ async function submitUserMessage(content: string) {
   let textNode: undefined | React.ReactNode
 
   try {
-    console.log(process.env.LLAMAEDGE_BASE_URL)
     const LlamaEdge = createOpenAI({
-      baseURL: process.env.LLAMAEDGE_BASE_URL,
-      apiKey: process.env.LLAMAEDGE_API_KEY
+      baseURL: baseUrl,
+      apiKey: apiKey
     });
-    console.log(LlamaEdge)
-    console.log(LlamaEdge(process.env.LLAMAEDGE_MODEL_NAME))
     const result = await streamUI({
-      model: LlamaEdge(process.env.LLAMAEDGE_MODEL_NAME),
+      model: LlamaEdge(modelName),
       initial: <SpinnerMessage />,
       maxRetries: 1,
       system: `\

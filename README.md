@@ -58,11 +58,11 @@ To get started locally, you can run the following:
 cp .env.example .env.local
 ```
 
-Add the base url and model name to .env.local, then run:
+Add the base URL and model name of your open source LLM to .env.local, then run:
 
 ```bash
 npm install
-npm dev
+npm run dev
 ```
 
 Your app should now be running on [localhost:3000](http://localhost:3000/).

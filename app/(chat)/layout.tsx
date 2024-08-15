@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 interface ChatLayoutProps {
   children: React.ReactNode
 }

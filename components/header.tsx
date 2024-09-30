@@ -21,8 +21,8 @@ async function UserOrLogin() {
         <Image
           src="https://www.gaianet.ai/images/logo-dark.png"
           alt="Gaia Logo"
-          width={100}
-          height={30}
+          width={50}
+          height={10}
         />
       </Link>
 

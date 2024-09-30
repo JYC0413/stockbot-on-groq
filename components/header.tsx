@@ -15,12 +15,12 @@ import { Session } from '@/lib/types'
 async function UserOrLogin() {
   return (
     <>
-      <Link href="https://wow.groq.com/groq-labs/" rel="nofollow">
+      <Link href="https://www.gaianet.ai" rel="nofollow">
         {/* <IconGroq className="size-6 mr-2 dark:hidden" />
           <IconGroq className="hidden size-6 mr-2 dark:block" /> */}
         <Image
-          src="https://www.gaianet.ai/imgs/logo.png"
-          alt="GroqLabs Logo"
+          src="https://www.gaianet.ai/images/logo-dark.png"
+          alt="Gaia Logo"
           width={100}
           height={30}
         />

@@ -28,6 +28,8 @@
     "next-env.d.ts",
     "next-auth.d.ts",
     "**/*.ts",
+    "**/**/*.ts",
+    "lib/chat/actions.tsx",
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],

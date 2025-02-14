@@ -42,7 +42,7 @@ interface MutableAIState {
   get: () => AIState
 }
 
-const baseUrl = process.env.LLAMAEDGE_BASE_URL || "https://llamatool.us.gaianet.network/v1"
+const baseUrl = process.env.LLAMAEDGE_BASE_URL || "https://llama8b.gaia.domains/v1"
 const apiKey = process.env.LLAMAEDGE_API_KEY || "LLAMAEDGE"
 const modelName = process.env.LLAMAEDGE_MODEL_NAME || "llama"
 

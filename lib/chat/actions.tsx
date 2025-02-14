@@ -44,7 +44,7 @@ interface MutableAIState {
 
 const baseUrl = process.env.LLAMAEDGE_BASE_URL || "https://llama8b.gaia.domains/v1"
 const apiKey = process.env.LLAMAEDGE_API_KEY || "LLAMAEDGE"
-const modelName = process.env.LLAMAEDGE_MODEL_NAME || "llama"
+const modelName = process.env.LLAMAEDGE_MODEL_NAME || "Meta-Llama-3.1-8B-Instruct-Q5_K_M"
 
 type ComparisonSymbolObject = {
   symbol: string;
